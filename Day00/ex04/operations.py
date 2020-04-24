@@ -11,11 +11,12 @@ def operations(x, y):
         else:
             div = x / y
             modulo = x % y
-        print("Sum:        ", x + y)
-        print("Difference:", x - y)
-        print("Product:     ", x * y)
-        print("Quotient:    ", div)
-        print("Remainder: ", modulo)
+        print(
+            f"sum:         {x + y}\n"
+            f"Difference:  {x - y}\n"
+            f"Product:     {x * y}\n"
+            f"Quotient:    {div}\n"
+            f"Remainder:   {modulo}")
     else:
         print(
             "InputError: only numbers\n"
