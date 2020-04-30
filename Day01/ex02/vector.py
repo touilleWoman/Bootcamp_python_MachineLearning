@@ -7,23 +7,23 @@ class Vector:
             self.values = [float(x) for x in range(0, values)]
             self.size = values
         elif isinstance(values, tuple) and len(values) == 2:
-            self.values = [float(x) for x in range (values[0], values[1])]
+            self.values = [float(x) for x in range(values[0], values[1])]
             self.size = len(self.values)
         else:
             raise TypeError
 
     def __str__(self):
-        return 'Vector ' + str(self.values)
-    
+        return "Vector " + str(self.values)
+
     def __repr__(self):
-        return {'values':self.values, 'size':self.size}
+        return {"values": self.values, "size": self.size}
 
     def __mul__(self, op):
         if isinstance(op, (int, float)):
-            return(Vector([x * op for x in self.values]))
+            return Vector([x * op for x in self.values])
 
     def __rmul__(self, op):
-        return(self.__mul__(op))
+        return self.__mul__(op)
 
     def __add__(self, op):
         if isinstance(op, (int, float)):
@@ -46,5 +46,3 @@ class Vector:
     def __rtruediv__(self, op):
         if isinstance(op, (int, float)):
             return Vector([op / x for x in self.values])
-
-

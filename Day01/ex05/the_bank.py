@@ -1,26 +1,26 @@
-class Account(object): 
-    
+class Account(object):
+
     ID_COUNT = 1
 
-    def __init__(self, name, **kwargs): 
-        self.id = self.ID_COUNT 
-        self.name = name 
+    def __init__(self, name, **kwargs):
+        self.id = self.ID_COUNT
+        self.name = name
         self.__dict__.update(kwargs)
         Account.ID_COUNT += 1
-    
-    def transfer(self, amount): 
+
+    def transfer(self, amount):
         self.value += amount
 
 
-class Bank(object): 
+class Bank(object):
     """The bank"""
-    def __init__(self): 
+
+    def __init__(self):
         self.accounts = []
 
-
-    def add(self, account): 
+    def add(self, account):
         self.accounts.append(account)
-    
+
     def get_account(self, target):
         if isinstance(target, str):
             target_act = next((x for x in self.accounts if x.name == target), None)
@@ -30,9 +30,9 @@ class Bank(object):
             raise TypeError
         if not target_act:
             return False
-        return target_act    
+        return target_act
 
-    def transfer(self, origin, dest, amount): 
+    def transfer(self, origin, dest, amount):
         """
             @origin:  int(id) or str(name) of the first account
             @dest:    int(id) or str(name) of the destination account
@@ -45,11 +45,15 @@ class Bank(object):
         dest_act = self.get_account(dest)
         if not dest_act:
             raise ValueError("dest doesn't exist")
-        
-        attri_lst = ['id', 'zip', 'addr', 'name', 'value']
-        if not all(x in dir(origin_act) for x in attri_lst) or not all(x in dir(dest_act) for x in attri_lst):
+
+        attri_lst = ["id", "zip", "addr", "name", "value"]
+        if not all(x in dir(origin_act) for x in attri_lst) or not all(
+            x in dir(dest_act) for x in attri_lst
+        ):
             return False
-        if any(elem.startswith('b') for elem in dir(origin_act)) or any(elem.startswith('b') for elem in dir(dest_act)):
+        if any(elem.startswith("b") for elem in dir(origin_act)) or any(
+            elem.startswith("b") for elem in dir(dest_act)
+        ):
             return False
 
         if amount < 0 or amount > origin_act.value:
@@ -59,10 +63,9 @@ class Bank(object):
         dest_act.value += amount
         return True
 
-    def fix_account(self, account): 
+    def fix_account(self, account):
         """
             fix the corrupted account
             @account: int(id) or str(name) of the account
             @return         True if success, False if an error occured
         """
-
